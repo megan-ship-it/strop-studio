@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valkyrie Protocol — Your training montage starts now.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0d0d10;
+    --onyx: #18181e;
+    --onyx-light: #22222a;
+    --steel: #c2c0bc;
+    --silver: #e8e6e2;
+    --blade: #f5f4f0;
+    --edge-blue: #7b9eb8;
+    --edge-blue-light: #a3c4d9;
+    --leather: #8b6f4e;
+    --leather-light: #b8956a;
+    --ember: #e8642c;
+    --ember-glow: rgba(232,100,44,0.15);
+    --gold: #c9a84c;
+    --gold-dim: rgba(201,168,76,0.12);
+    --white-005: rgba(255,255,255,0.05);
+    --white-008: rgba(255,255,255,0.08);
+    --white-003: rgba(255,255,255,0.03);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--obsidian);
+    color: var(--silver);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== NAV ========== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(13,13,16,0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--white-005);
+  }
+
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: var(--blade);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+  }
+
+  .nav-brand span {
+    font-weight: 400;
+    color: var(--steel);
+    margin-left: 0.3rem;
+    font-size: 1rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--steel);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--blade); }
+
+  .nav-cta {
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase;
+    color: var(--obsidian) !important;
+    background: linear-gradient(135deg, var(--ember), var(--gold));
+    padding: 0.6rem 1.4rem;
+    border-radius: 4px;
+    transition: all 0.3s ease !important;
+  }
+
+  .nav-cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(232,100,44,0.3);
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 8rem 3rem 6rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(232,100,44,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 30% 30%, rgba(201,168,76,0.04) 0%, transparent 50%);
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-content { max-width: 600px; }
+
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+    animation: slideIn 0.8s 0.2s forwards;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--ember);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    color: var(--blade);
+    margin-bottom: 0.3rem;
+    opacity: 0;
+    animation: slideIn 0.8s 0.4s forwards;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: slideIn 0.8s 0.5s forwards;
+  }
+
+  .hero-desc {
+    font-weight: 300;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--steel);
+    max-width: 480px;
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: slideIn 0.8s 0.65s forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--obsidian);
+    background: linear-gradient(135deg, var(--ember), var(--gold));
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: slideIn 0.8s 0.8s forwards;
+  }
+
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(232,100,44,0.3);
+  }
+
+  /* ========== PHONE MOCKUP ========== */
+  .phone-mockup {
+    width: 280px;
+    height: 560px;
+    background: var(--onyx);
+    border-radius: 36px;
+    border: 3px solid rgba(255,255,255,0.08);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
+    flex-shrink: 0;
+    opacity: 0;
+    animation: phoneIn 1s 0.6s forwards;
+  }
+
+  .phone-notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 28px;
+    background: var(--obsidian);
+    border-radius: 0 0 18px 18px;
+    z-index: 5;
+  }
+
+  .phone-screen {
+    padding: 40px 20px 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, var(--obsidian) 0%, var(--onyx) 100%);
+  }
+
+  .mock-greeting {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--blade);
+    margin-bottom: 0.25rem;
+  }
+
+  .mock-mood {
+    font-size: 0.65rem;
+    color: var(--steel);
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.05em;
+  }
+
+  .mock-workout-card {
+    background: rgba(232,100,44,0.08);
+    border: 1px solid rgba(232,100,44,0.15);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .mock-workout-label {
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 0.4rem;
+  }
+
+  .mock-workout-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--blade);
+    margin-bottom: 0.3rem;
+  }
+
+  .mock-workout-detail {
+    font-size: 0.65rem;
+    color: var(--steel);
+    line-height: 1.5;
+  }
+
+  .mock-dialogue {
+    background: rgba(201,168,76,0.06);
+    border-left: 2px solid var(--gold);
+    padding: 0.75rem 0.85rem;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 1rem;
+  }
+
+  .mock-dialogue p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--silver);
+    line-height: 1.5;
+  }
+
+  .mock-dialogue .speaker {
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+
+  .mock-start-btn {
+    background: linear-gradient(135deg, var(--ember), var(--gold));
+    color: var(--obsidian);
+    border: none;
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: auto;
+  }
+
+  /* ========== SECTIONS SHARED ========== */
+  .section-divider {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, rgba(232,100,44,0.3), transparent);
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    color: var(--blade);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-desc {
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--steel);
+    max-width: 560px;
+  }
+
+  /* ========== HOW IT WORKS ========== */
+  .how-it-works {
+    padding: 6rem 3rem;
+    position: relative;
+  }
+
+  .how-it-works::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--white-008), transparent);
+  }
+
+  .how-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .how-header .section-desc {
+    margin: 0 auto;
+  }
+
+  .progression-track {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .progression-track::before {
+    content: '';
+    position: absolute;
+    top: 48px;
+    left: 16.5%;
+    right: 16.5%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--ember), var(--gold), var(--edge-blue));
+    opacity: 0.3;
+  }
+
+  .prog-step {
+    text-align: center;
+    position: relative;
+    padding: 0 1.5rem;
+  }
+
+  .prog-icon {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .prog-step:nth-child(1) .prog-icon {
+    background: rgba(232,100,44,0.08);
+    border: 1px solid rgba(232,100,44,0.2);
+  }
+  .prog-step:nth-child(2) .prog-icon {
+    background: var(--gold-dim);
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+  .prog-step:nth-child(3) .prog-icon {
+    background: rgba(123,158,184,0.08);
+    border: 1px solid rgba(123,158,184,0.2);
+  }
+
+  .prog-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .prog-step h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: var(--blade);
+    margin-bottom: 0.5rem;
+  }
+
+  .prog-step p {
+    font-weight: 300;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--steel);
+  }
+
+  .prog-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    position: absolute;
+    top: 4px;
+    right: 20%;
+    opacity: 0.06;
+    color: var(--blade);
+  }
+
+  /* ========== WORKOUT PREVIEW ========== */
+  .workout-preview {
+    padding: 6rem 3rem;
+    position: relative;
+  }
+
+  .workout-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--white-008), transparent);
+  }
+
+  .workout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  .workout-text { padding-top: 1rem; }
+
+  .workout-card {
+    background: var(--onyx);
+    border: 1px solid var(--white-005);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .workout-card-header {
+    background: linear-gradient(135deg, rgba(232,100,44,0.1), rgba(201,168,76,0.05));
+    padding: 1.5rem 1.75rem;
+    border-bottom: 1px solid var(--white-005);
+  }
+
+  .wk-day {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 0.3rem;
+  }
+
+  .wk-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: var(--blade);
+    margin-bottom: 0.2rem;
+  }
+
+  .wk-type {
+    font-size: 0.7rem;
+    color: var(--gold);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+  }
+
+  .workout-card-body {
+    padding: 1.5rem 1.75rem;
+  }
+
+  .wk-section-label {
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .wk-section-label:first-child { margin-top: 0; }
+
+  .wk-exercise {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--white-003);
+  }
+
+  .wk-exercise:last-child { border-bottom: none; }
+
+  .wk-exercise-name {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--silver);
+  }
+
+  .wk-exercise-reps {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  .wk-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(201,168,76,0.6);
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--white-005);
+  }
+
+  /* ========== VOICE SYSTEM ========== */
+  .voice-system {
+    padding: 6rem 3rem;
+    position: relative;
+  }
+
+  .voice-system::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--white-008), transparent);
+  }
+
+  .voice-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .voice-header .section-desc {
+    margin: 0 auto;
+  }
+
+  .voice-examples {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .voice-card {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    background: var(--onyx);
+    border: 1px solid var(--white-005);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .voice-card:hover {
+    border-color: var(--white-008);
+  }
+
+  .voice-mood {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .voice-mood-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .voice-mood-label {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  .mood-fierce .voice-mood { background: rgba(232,100,44,0.06); }
+  .mood-fierce .voice-mood-label { color: var(--ember); }
+  .mood-sad .voice-mood { background: rgba(123,158,184,0.06); }
+  .mood-sad .voice-mood-label { color: var(--edge-blue); }
+  .mood-anxious .voice-mood { background: rgba(201,168,76,0.06); }
+  .mood-anxious .voice-mood-label { color: var(--gold); }
+  .mood-numb .voice-mood { background: rgba(194,192,188,0.04); }
+  .mood-numb .voice-mood-label { color: var(--steel); }
+
+  .voice-content {
+    padding: 1.5rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .voice-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--blade);
+    margin-bottom: 0.5rem;
+  }
+
+  .voice-context {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: var(--steel);
+    letter-spacing: 0.03em;
+  }
+
+  .voice-stat {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+  }
+
+  .voice-stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+    font-size: 3rem;
+    background: linear-gradient(135deg, var(--ember), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .voice-stat-desc {
+    font-size: 0.8rem;
+    color: var(--steel);
+    font-weight: 300;
+    margin-top: 0.25rem;
+  }
+
+  /* ========== MINDFULNESS ========== */
+  .mindfulness {
+    padding: 6rem 3rem;
+    position: relative;
+  }
+
+  .mindfulness::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--white-008), transparent);
+  }
+
+  .mind-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .mind-header .section-desc {
+    margin: 0 auto;
+  }
+
+  .mind-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .mind-card {
+    background: var(--onyx);
+    border: 1px solid var(--white-005);
+    border-radius: 14px;
+    padding: 2rem 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .mind-card:hover {
+    border-color: var(--white-008);
+    transform: translateY(-3px);
+  }
+
+  .mind-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--edge-blue), rgba(123,158,184,0.3));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .mind-card:hover::after { opacity: 1; }
+
+  .mind-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 1;
+  }
+
+  .mind-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--blade);
+    margin-bottom: 0.5rem;
+  }
+
+  .mind-card p {
+    font-weight: 300;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--steel);
+  }
+
+  .mind-context {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--gold);
+    margin-top: 0.75rem;
+    opacity: 0.7;
+  }
+
+  /* ========== CREDIBILITY ========== */
+  .credibility {
+    padding: 4rem 3rem;
+    position: relative;
+  }
+
+  .credibility::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--white-008), transparent);
+  }
+
+  .cred-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .cred-label {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 2rem;
+  }
+
+  .cred-badges {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .cred-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .cred-badge-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--onyx);
+    border: 1px solid var(--white-008);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cred-badge-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--gold);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .cred-badge-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--silver);
+  }
+
+  .cred-badge-sub {
+    font-size: 0.65rem;
+    color: var(--steel);
+    font-weight: 300;
+  }
+
+  /* ========== FOUNDER ========== */
+  .founder {
+    padding: 6rem 3rem;
+    position: relative;
+  }
+
+  .founder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--white-008), transparent);
+  }
+
+  .founder-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .founder-inner .section-eyebrow { text-align: center; }
+  .founder-inner .section-title { text-align: center; margin-bottom: 2rem; }
+
+  .founder-text p {
+    font-weight: 300;
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--steel);
+    margin-bottom: 1rem;
+  }
+
+  .founder-text em {
+    font-style: italic;
+    color: var(--silver);
+  }
+
+  .founder-text .founder-sig {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1rem;
+    margin-top: 1.5rem;
+    opacity: 0.7;
+  }
+
+  /* ========== FINAL CTA ========== */
+  .final-cta {
+    padding: 6rem 3rem 8rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--white-008), transparent);
+  }
+
+  .final-cta h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: var(--blade);
+    margin-bottom: 0.75rem;
+  }
+
+  .final-cta .cta-sub {
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: var(--steel);
+    margin-bottom: 2.5rem;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .email-form {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 440px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .email-input {
+    flex: 1;
+    min-width: 220px;
+    padding: 0.85rem 1.2rem;
+    background: var(--onyx);
+    border: 1px solid var(--white-008);
+    border-radius: 4px;
+    color: var(--blade);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .email-input::placeholder { color: rgba(194,192,188,0.4); }
+  .email-input:focus { border-color: var(--ember); }
+
+  .email-submit {
+    padding: 0.85rem 1.8rem;
+    background: linear-gradient(135deg, var(--ember), var(--gold));
+    color: var(--obsidian);
+    border: none;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .email-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(232,100,44,0.3);
+  }
+
+  .cta-note {
+    font-size: 0.7rem;
+    color: rgba(194,192,188,0.3);
+    margin-top: 1rem;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    padding: 2.5rem 3rem;
+    border-top: 1px solid var(--white-003);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--steel);
+    text-decoration: none;
+  }
+
+  .footer-right {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .footer-right a {
+    font-size: 0.75rem;
+    color: rgba(194,192,188,0.4);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-right a:hover { color: var(--steel); }
+
+  .footer-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: rgba(194,192,188,0.25);
+  }
+
+  /* ========== ANIMATIONS ========== */
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-24px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes phoneIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    .nav-links .hide-mobile { display: none; }
+
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      text-align: center;
+    }
+    .hero-eyebrow { justify-content: center; }
+    .hero-eyebrow::before { display: none; }
+    .hero-desc { margin: 0 auto 2rem; }
+    .phone-mockup {
+      width: 240px;
+      height: 480px;
+      margin: 0 auto;
+    }
+
+    .how-it-works, .workout-preview, .voice-system, .mindfulness, .founder, .credibility {
+      padding: 4rem 1.5rem;
+    }
+
+    .progression-track {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+    .progression-track::before { display: none; }
+
+    .workout-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .voice-card {
+      grid-template-columns: 1fr;
+    }
+
+    .mind-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cred-badges { gap: 2rem; }
+
+    .final-cta { padding: 4rem 1.5rem 6rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+    .footer-right { flex-direction: column; gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Valkyrie <span>Protocol</span></a>
+  <ul class="nav-links">
+    <li><a href="#features" class="hide-mobile">Features</a></li>
+    <li><a href="#workouts" class="hide-mobile">Workouts</a></li>
+    <li><a href="#voice" class="hide-mobile">Voice</a></li>
+    <li><a href="#waitlist" class="nav-cta">Join Waitlist</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">A Strop Studio App</div>
+      <h1 class="hero-title">Valkyrie Protocol</h1>
+      <p class="hero-subtitle">Your training montage starts now.</p>
+      <p class="hero-desc">A fantasy warrior fitness app with real workout programming, mood-aware motivational dialogue, and mindfulness built into every session. Because the gym was never boring in the books.</p>
+      <a href="#waitlist" class="hero-cta">Join the Waitlist</a>
+    </div>
+
+    <!-- PHONE MOCKUP -->
+    <div class="phone-mockup">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="mock-greeting">Rise, warrior.</div>
+        <div class="mock-mood">Today's mood: Ready to fight</div>
+
+        <div class="mock-workout-card">
+          <div class="mock-workout-label">Today's Training</div>
+          <div class="mock-workout-name">Blade Conditioning</div>
+          <div class="mock-workout-detail">AMRAP &bull; 15 min &bull; Bodyweight<br>Squats, Push-ups, Hollow Hold, Burpees</div>
+        </div>
+
+        <div class="mock-dialogue">
+          <span class="speaker">Your Commander</span>
+          <p>"You showed up. That's already more than most warriors manage. Now let's make it count."</p>
+        </div>
+
+        <button class="mock-start-btn">Begin Training</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works" id="features">
+  <div class="how-header reveal">
+    <div class="section-eyebrow">How It Works</div>
+    <h2 class="section-title">Real programming. Real progressions.</h2>
+    <p class="section-desc">Built on the same Mechanics &rarr; Consistency &rarr; Intensity framework used in professional CrossFit training. Every workout is reviewed by certified trainers.</p>
+  </div>
+
+  <div class="progression-track reveal">
+    <div class="prog-step">
+      <div class="prog-num">I</div>
+      <div class="prog-icon">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="14" stroke="#e8642c" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <path d="M18 10v16M12 18h12" stroke="#e8642c" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>Mechanics</h3>
+      <p>Learn how to move correctly. Every exercise comes with scaling options so you start where you actually are, not where you think you should be.</p>
+    </div>
+
+    <div class="prog-step">
+      <div class="prog-num">II</div>
+      <div class="prog-icon">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 26L12 20L18 24L24 14L30 10" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="18" cy="24" r="2" fill="rgba(201,168,76,0.3)"/>
+        </svg>
+      </div>
+      <h3>Consistency</h3>
+      <p>Build the habit. The story keeps pulling you back. Dialogue adapts to whether you've been away a day or a week. No guilt. Just "welcome back."</p>
+    </div>
+
+    <div class="prog-step">
+      <div class="prog-num">III</div>
+      <div class="prog-icon">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 4L22 14H32L24 20L27 30L18 24L9 30L12 20L4 14H14L18 4Z" stroke="#7b9eb8" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <h3>Intensity</h3>
+      <p>Push harder when you're ready. AMRAPs, EMOMs, and For Time workouts that scale with your level. The story gets more intense when you do.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORKOUT PREVIEW -->
+<section class="workout-preview" id="workouts">
+  <div class="workout-grid">
+    <div class="workout-text reveal">
+      <div class="section-eyebrow">Sample Day</div>
+      <h2 class="section-title">Every session tells a story</h2>
+      <p class="section-desc">Workouts are structured with warm-up, skill work, a main effort, and a cool-down. The fantasy narrative weaves through every phase, but the programming underneath is built to actually make you stronger.</p>
+      <p class="section-desc" style="margin-top: 1rem;">All workouts start bodyweight-only. No equipment. No gym membership. No excuses about not having the right gear.</p>
+    </div>
+
+    <div class="workout-card reveal">
+      <div class="workout-card-header">
+        <div class="wk-day">Week 2 &bull; Day 3</div>
+        <div class="wk-name">Blade Conditioning</div>
+        <div class="wk-type">AMRAP &bull; 15 Minutes</div>
+      </div>
+      <div class="workout-card-body">
+        <div class="wk-section-label">Warm-Up</div>
+        <div class="wk-exercise">
+          <span class="wk-exercise-name">Arm Circles</span>
+          <span class="wk-exercise-reps">30 sec each</span>
+        </div>
+        <div class="wk-exercise">
+          <span class="wk-exercise-name">Inchworms</span>
+          <span class="wk-exercise-reps">5 reps</span>
+        </div>
+        <div class="wk-exercise">
+          <span class="wk-exercise-name">Leg Swings</span>
+          <span class="wk-exercise-reps">10 each side</span>
+        </div>
+
+        <div class="wk-section-label">Main Effort</div>
+        <div class="wk-exercise">
+          <span class="wk-exercise-name">Air Squats</span>
+          <span class="wk-exercise-reps">10 reps</span>
+        </div>
+        <div class="wk-exercise">
+          <span class="wk-exercise-name">Push-Ups (scaled)</span>
+          <span class="wk-exercise-reps">8 reps</span>
+        </div>
+        <div class="wk-exercise">
+          <span class="wk-exercise-name">Hollow Body Hold</span>
+          <span class="wk-exercise-reps">20 sec</span>
+        </div>
+        <div class="wk-exercise">
+          <span class="wk-exercise-name">Burpees</span>
+          <span class="wk-exercise-reps">5 reps</span>
+        </div>
+
+        <div class="wk-section-label">Cool-Down</div>
+        <div class="wk-exercise">
+          <span class="wk-exercise-name">Warrior's Centering Breath</span>
+          <span class="wk-exercise-reps">2 min</span>
+        </div>
+
+        <div class="wk-note">"Complete as many rounds as possible. Rest when you need to. The blade doesn't dull from resting &mdash; it dulls from never being drawn."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICE SYSTEM -->
+<section class="voice-system" id="voice">
+  <div class="voice-header reveal">
+    <div class="section-eyebrow">The Voice</div>
+    <h2 class="section-title">It knows how you're feeling</h2>
+    <p class="section-desc">Before each session, you check in with your mood. The dialogue adapts &mdash; pushing you harder on fierce days, meeting you gently on hard ones. Never generic. Never preachy.</p>
+  </div>
+
+  <div class="voice-examples">
+    <div class="voice-card mood-fierce reveal">
+      <div class="voice-mood">
+        <div class="voice-mood-icon">&#9876;</div>
+        <div class="voice-mood-label">Fierce</div>
+      </div>
+      <div class="voice-content">
+        <p class="voice-line">"Good. You came in hot. Let's use that. Channel every ounce of it into the work. When we're done, you'll have earned the quiet."</p>
+        <p class="voice-context">Plays at the start of a high-energy session</p>
+      </div>
+    </div>
+
+    <div class="voice-card mood-sad reveal">
+      <div class="voice-mood">
+        <div class="voice-mood-icon">&#9790;</div>
+        <div class="voice-mood-label">Sad</div>
+      </div>
+      <div class="voice-content">
+        <p class="voice-line">"You don't have to be strong right now. You just have to be here. Move when you can. Rest when you need to. I'm not going anywhere."</p>
+        <p class="voice-context">Plays during warm-up on low-energy days</p>
+      </div>
+    </div>
+
+    <div class="voice-card mood-anxious reveal">
+      <div class="voice-mood">
+        <div class="voice-mood-icon">&#10043;</div>
+        <div class="voice-mood-label">Anxious</div>
+      </div>
+      <div class="voice-content">
+        <p class="voice-line">"Your mind is racing. That's okay. We're going to give it somewhere to go. Focus on your breath for four counts. Then we move."</p>
+        <p class="voice-context">Plays before the first exercise with guided breathing</p>
+      </div>
+    </div>
+
+    <div class="voice-card mood-numb reveal">
+      <div class="voice-mood">
+        <div class="voice-mood-icon">&#8943;</div>
+        <div class="voice-mood-label">Numb</div>
+      </div>
+      <div class="voice-content">
+        <p class="voice-line">"Sometimes the body remembers what the mind forgets. You may not feel anything right now. That's fine. Let's just get you moving."</p>
+        <p class="voice-context">Plays when user selects "I feel nothing" mood</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="voice-stat reveal">
+    <div class="voice-stat-num">512+</div>
+    <div class="voice-stat-desc">unique voice lines &mdash; smart picker ensures you won't hear the same one twice in a month</div>
+  </div>
+</section>
+
+<!-- MINDFULNESS -->
+<section class="mindfulness" id="mind">
+  <div class="mind-header reveal">
+    <div class="section-eyebrow">Mind & Body</div>
+    <h2 class="section-title">A real warrior trains both</h2>
+    <p class="section-desc">Every fighting tradition in history includes a centering practice. Samurai meditated. Special ops operators train their breathing. This isn't soft. It's tactically essential.</p>
+  </div>
+
+  <div class="mind-grid">
+    <div class="mind-card reveal">
+      <div class="mind-icon">&#9711;</div>
+      <h3>Breathing Between Sets</h3>
+      <p>Guided breath work woven into rest periods. Not just a timer counting down &mdash; intentional recovery that makes your next set stronger.</p>
+      <p class="mind-context">"Breathe in for 4. Hold for 4. Out for 6. The warrior who controls her breath controls the fight."</p>
+    </div>
+
+    <div class="mind-card reveal">
+      <div class="mind-icon">&#9673;</div>
+      <h3>Dedicated Mindfulness Sessions</h3>
+      <p>Full standalone workouts for meditation, body scans, and breath work. For the days when the bravest thing you can do is sit still.</p>
+      <p class="mind-context">"Not every battle is fought standing up."</p>
+    </div>
+
+    <div class="mind-card reveal">
+      <div class="mind-icon">&#10070;</div>
+      <h3>Mood-Specific Pauses</h3>
+      <p>Different practices for different states &mdash; grounding for anxiety, gentle movement for numbness, release work for anger, permission to feel for sadness.</p>
+      <p class="mind-context">"Your mood is data, not a verdict."</p>
+    </div>
+
+    <div class="mind-card reveal">
+      <div class="mind-icon">&#10047;</div>
+      <h3>Cool-Down Rituals</h3>
+      <p>Every session ends with a centering practice. Transition out of warrior mode and back into your life, grounded and present.</p>
+      <p class="mind-context">"The battle is over. Come back to yourself."</p>
+    </div>
+  </div>
+</section>
+
+<!-- CREDIBILITY -->
+<section class="credibility">
+  <div class="cred-inner reveal">
+    <div class="cred-label">Every workout is reviewed and approved by</div>
+    <div class="cred-badges">
+      <div class="cred-badge">
+        <div class="cred-badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L15 8H21L16.5 12.5L18 19L12 15.5L6 19L7.5 12.5L3 8H9L12 2Z"/></svg>
+        </div>
+        <span class="cred-badge-title">CrossFit Instructor</span>
+        <span class="cred-badge-sub">Programming & progression</span>
+      </div>
+      <div class="cred-badge">
+        <div class="cred-badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l6.59-6.59L19 9l-8 8z"/></svg>
+        </div>
+        <span class="cred-badge-title">Special Ops Warrior</span>
+        <span class="cred-badge-sub">Functional fitness & grit</span>
+      </div>
+      <div class="cred-badge">
+        <div class="cred-badge-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <span class="cred-badge-title">MMA Black Belt</span>
+        <span class="cred-badge-sub">Movement & intensity</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder">
+  <div class="founder-inner reveal">
+    <div class="section-eyebrow">The Maker</div>
+    <h2 class="section-title">Built by the person who needed it</h2>
+    <div class="founder-text">
+      <p>I'm a licensed clinical social worker who married into the world's fittest family. They love the gym. I found it unbearably boring. I'd start programs, lose interest in a week, and feel like the only person who couldn't just <em>make herself do the thing.</em></p>
+      <p>Then I'd open a book, read a training montage, and think: <em>that. I want that.</em> Not the six-pack. The feeling that it matters.</p>
+      <p>When my doctor told me my cholesterol was high, I stopped wishing and started building. What I know from clinical practice is this: people don't fail at fitness because they lack discipline. They fail because the experience doesn't meet a psychological need. Story does. Narrative therapy, bibliotherapy &mdash; there are entire therapeutic modalities built on the principle that story drives behavioral change.</p>
+      <p>This isn't a gimmick. It's a clinically informed approach wearing really cool armor.</p>
+      <p class="founder-sig">&mdash; Megan, Founder of Strop Studio</p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="waitlist">
+  <h2 class="reveal">Your training montage starts now</h2>
+  <p class="cta-sub reveal">Be the first to know when Valkyrie Protocol launches. No spam, no fluff &mdash; just your orders when the time comes.</p>
+  <form class="email-form reveal" onsubmit="event.preventDefault(); this.innerHTML='<p style=\'color: var(--gold); font-family: Cormorant Garamond, serif; font-size: 1.2rem; font-style: italic; padding: 1rem;\'>Welcome to the ranks, warrior.</p>';">
+    <input type="email" class="email-input" placeholder="your@email.com" required>
+    <button type="submit" class="email-submit">Enlist</button>
+  </form>
+  <p class="cta-note reveal">No spam. Unsubscribe anytime. We're too busy building workouts to send you junk.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-brand">Strop Studio</a>
+  <div class="footer-right">
+    <a href="#">Instagram</a>
+    <a href="#">TikTok</a>
+    <span class="footer-tagline">The final edge. &copy; 2026</span>
+  </div>
+</footer>
+
+<!-- SCROLL REVEAL -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

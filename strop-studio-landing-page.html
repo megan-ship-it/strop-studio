@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strop Studio — Fantasy-Themed Tools for Real Life</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --obsidian: #0d0d10;
+    --onyx: #18181e;
+    --onyx-light: #222228;
+    --steel: #c2c0bc;
+    --silver: #e8e6e2;
+    --blade: #f5f4f0;
+    --edge-blue: #7b9eb8;
+    --edge-blue-light: #a3c4d9;
+    --edge-blue-dim: rgba(123, 158, 184, 0.15);
+    --leather: #8b6f4e;
+    --leather-light: #b8956a;
+    --ember: #e8642c;
+    --gold: #c9a84c;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--obsidian);
+    color: var(--silver);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--edge-blue);
+    color: var(--obsidian);
+  }
+
+  /* =============================================
+     NAV
+  ============================================= */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(13, 13, 16, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    transition: padding 0.3s ease;
+  }
+
+  .nav-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: var(--blade);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+
+  .nav-wordmark span {
+    font-weight: 400;
+    font-size: 0.85rem;
+    color: var(--steel);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .nav-cta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--obsidian);
+    background: var(--blade);
+    padding: 0.6rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .nav-cta:hover {
+    background: var(--edge-blue-light);
+    transform: translateY(-1px);
+  }
+
+  /* =============================================
+     HERO
+  ============================================= */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding: 8rem 3rem 6rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 20% 50%, rgba(123, 158, 184, 0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 30%, rgba(139, 111, 78, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-accent {
+    position: absolute;
+    top: 0;
+    right: 12%;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 10%, rgba(123,158,184,0.1) 30%, rgba(123,158,184,0.1) 70%, transparent 90%);
+    pointer-events: none;
+  }
+
+  .hero-accent-2 {
+    position: absolute;
+    top: 0;
+    right: calc(12% + 30px);
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 20%, rgba(139,111,78,0.06) 40%, rgba(139,111,78,0.06) 60%, transparent 80%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 750px;
+  }
+
+  .hero-marker {
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--edge-blue);
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: slideIn 0.8s 0.3s forwards;
+  }
+
+  .hero-marker::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--edge-blue);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    line-height: 1.08;
+    color: var(--blade);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: slideIn 0.8s 0.5s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--edge-blue-light);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    color: var(--edge-blue-light);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: slideIn 0.8s 0.6s forwards;
+  }
+
+  .hero-sub {
+    font-weight: 300;
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    color: var(--steel);
+    line-height: 1.8;
+    max-width: 560px;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: slideIn 0.8s 0.7s forwards;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: slideIn 0.8s 0.9s forwards;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--obsidian);
+    background: var(--blade);
+    padding: 1rem 2.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--edge-blue-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(123,158,184,0.15);
+  }
+
+  .scroll-hint {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--steel);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.3s ease;
+  }
+
+  .scroll-hint:hover {
+    color: var(--edge-blue-light);
+  }
+
+  /* =============================================
+     PHILOSOPHY SECTION
+  ============================================= */
+  .philosophy {
+    padding: 8rem 3rem;
+    position: relative;
+  }
+
+  .philosophy::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(123,158,184,0.2), transparent);
+  }
+
+  .philosophy-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .philosophy-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--blade);
+  }
+
+  .philosophy-text em {
+    font-style: italic;
+    color: var(--edge-blue-light);
+  }
+
+  .philosophy-follow {
+    font-weight: 300;
+    font-size: clamp(1rem, 2vw, 1.1rem);
+    color: var(--steel);
+    line-height: 1.8;
+    margin-top: 2rem;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* =============================================
+     PRODUCTS SECTION
+  ============================================= */
+  .products {
+    padding: 6rem 3rem 8rem;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-label {
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--edge-blue);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .section-label::before,
+  .section-label::after {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--edge-blue);
+    opacity: 0.5;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--blade);
+    line-height: 1.15;
+  }
+
+  .section-subtitle {
+    font-weight: 300;
+    font-size: 1rem;
+    color: var(--steel);
+    margin-top: 0.8rem;
+    font-style: italic;
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .product-card {
+    background: var(--onyx);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  .product-card:hover {
+    border-color: rgba(255,255,255,0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+
+  .product-card.valkyrie::before {
+    background: linear-gradient(90deg, var(--ember), var(--gold));
+  }
+
+  .product-card.tavern::before {
+    background: linear-gradient(90deg, var(--leather), var(--leather-light));
+  }
+
+  .product-status {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-card.valkyrie .product-status {
+    color: var(--ember);
+    background: rgba(232, 100, 44, 0.1);
+    border: 1px solid rgba(232, 100, 44, 0.2);
+  }
+
+  .product-card.tavern .product-status {
+    color: var(--leather-light);
+    background: rgba(139, 111, 78, 0.1);
+    border: 1px solid rgba(139, 111, 78, 0.2);
+  }
+
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: var(--blade);
+    margin-bottom: 0.3rem;
+  }
+
+  .product-tagline {
+    font-size: 0.85rem;
+    color: var(--edge-blue);
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 1.2rem;
+  }
+
+  .product-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--steel);
+    margin-bottom: 1.5rem;
+  }
+
+  .product-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .feature-tag {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    padding: 0.35rem 0.8rem;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.04);
+    color: var(--steel);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .product-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .product-link.valkyrie-link {
+    color: var(--ember);
+  }
+
+  .product-link.valkyrie-link:hover {
+    color: var(--gold);
+    transform: translateX(4px);
+  }
+
+  .product-coming-soon {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--leather-light);
+    font-style: italic;
+    opacity: 0.85;
+  }
+
+  /* =============================================
+     THE MAKER (FOUNDER STORY)
+  ============================================= */
+  .maker {
+    padding: 8rem 3rem;
+    position: relative;
+    background: var(--onyx);
+    border-top: 1px solid rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .maker::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 70% 40%, rgba(139, 111, 78, 0.03) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .maker-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .maker-label {
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--leather-light);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .maker-label::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--leather-light);
+  }
+
+  .maker-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--blade);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .maker-subtitle {
+    font-style: italic;
+    font-weight: 300;
+    font-size: 1.05rem;
+    color: var(--edge-blue-light);
+    margin-bottom: 2.5rem;
+  }
+
+  .maker-text {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--silver);
+    margin-bottom: 1.5rem;
+  }
+
+  .maker-text strong {
+    color: var(--blade);
+    font-weight: 500;
+  }
+
+  .maker-text em {
+    color: var(--edge-blue-light);
+    font-style: italic;
+  }
+
+  .maker-highlight {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--edge-blue-light);
+    line-height: 1.6;
+    padding: 1.5rem 0 1.5rem 1.5rem;
+    border-left: 2px solid var(--leather);
+    margin: 2rem 0;
+  }
+
+  /* =============================================
+     WAITLIST CTA
+  ============================================= */
+  .waitlist {
+    padding: 8rem 3rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .waitlist::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(123,158,184,0.2), transparent);
+  }
+
+  .waitlist-inner {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .waitlist-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--blade);
+    margin-bottom: 1rem;
+  }
+
+  .waitlist-sub {
+    font-weight: 300;
+    font-size: 1rem;
+    color: var(--steel);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .waitlist-form {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 440px;
+    margin: 0 auto 1rem;
+  }
+
+  .waitlist-input {
+    flex: 1;
+    padding: 0.9rem 1.2rem;
+    background: var(--onyx);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    color: var(--blade);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .waitlist-input::placeholder {
+    color: rgba(194, 192, 188, 0.5);
+  }
+
+  .waitlist-input:focus {
+    border-color: var(--edge-blue);
+  }
+
+  .waitlist-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--obsidian);
+    background: var(--blade);
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .waitlist-btn:hover {
+    background: var(--edge-blue-light);
+    transform: translateY(-1px);
+  }
+
+  .waitlist-note {
+    font-size: 0.8rem;
+    color: rgba(194, 192, 188, 0.5);
+    font-weight: 300;
+  }
+
+  /* =============================================
+     TRANSPARENCY SECTION
+  ============================================= */
+  .transparency {
+    padding: 4rem 3rem 6rem;
+    position: relative;
+  }
+
+  .transparency-inner {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2.5rem;
+    background: var(--onyx);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .transparency-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--edge-blue), var(--leather));
+    opacity: 0.4;
+  }
+
+  .transparency-label {
+    font-weight: 500;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--edge-blue);
+    margin-bottom: 1.2rem;
+  }
+
+  .transparency-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--blade);
+    margin-bottom: 1.5rem;
+  }
+
+  .transparency-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--steel);
+    margin-bottom: 1rem;
+  }
+
+  /* =============================================
+     FOOTER
+  ============================================= */
+  .footer {
+    padding: 3rem;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .footer-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--blade);
+    letter-spacing: 0.04em;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+    color: var(--steel);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--edge-blue-light);
+  }
+
+  .footer-tagline {
+    font-size: 0.8rem;
+    color: rgba(194, 192, 188, 0.4);
+    font-style: italic;
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  /* =============================================
+     SCROLL ANIMATIONS
+  ============================================= */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* =============================================
+     RESPONSIVE
+  ============================================= */
+  @media (max-width: 768px) {
+    .nav { padding: 1rem 1.5rem; }
+    .nav-wordmark { font-size: 1.1rem; }
+    .nav-wordmark span { font-size: 0.7rem; }
+    .nav-cta { padding: 0.5rem 1rem; font-size: 0.65rem; }
+
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .hero-accent, .hero-accent-2 { display: none; }
+
+    .philosophy { padding: 5rem 1.5rem; }
+    .products { padding: 4rem 1.5rem 6rem; }
+    .product-grid { grid-template-columns: 1fr; }
+    .product-card { padding: 2rem; }
+
+    .maker { padding: 5rem 1.5rem; }
+    .maker-highlight { font-size: 1.1rem; padding-left: 1rem; }
+
+    .waitlist { padding: 5rem 1.5rem; }
+    .waitlist-form { flex-direction: column; }
+    .waitlist-btn { width: 100%; padding: 1rem; }
+
+    .transparency { padding: 2rem 1.5rem 4rem; }
+    .transparency-inner { padding: 2rem; }
+
+    .footer {
+      padding: 2rem 1.5rem;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .footer-links { gap: 1.5rem; }
+
+    .hero-cta-group {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 2.2rem; }
+    .hero-subtitle { font-size: 1.1rem; }
+    .product-name { font-size: 1.5rem; }
+    .maker-title { font-size: 1.6rem; }
+    .waitlist-title { font-size: 1.8rem; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- =================== NAV =================== -->
+<nav class="nav">
+  <a href="#" class="nav-wordmark">Strop <span>Studio</span></a>
+  <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+</nav>
+
+<!-- =================== HERO =================== -->
+<section class="hero">
+  <div class="hero-accent"></div>
+  <div class="hero-accent-2"></div>
+  <div class="hero-content">
+    <div class="hero-marker">Fantasy-themed tools for real life</div>
+    <h1 class="hero-title">A good story is <em>irresistible.</em></h1>
+    <p class="hero-subtitle">Why should you have to leave your life to live inside one?</p>
+    <p class="hero-sub">
+      Strop Studio builds apps that wrap your real-world routines in the stories you love. Workouts, chores, and the mundane tasks of being alive &mdash; reimagined as adventures worth living.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#waitlist" class="btn-primary">Join the Waitlist</a>
+      <a href="#philosophy" class="scroll-hint">See what we're building &darr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== PHILOSOPHY =================== -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner reveal">
+    <p class="philosophy-text">
+      Nothing pulls a person in like a good story. The problem is, most stories ask you to leave your life behind to experience them. What if your real life could feel like one <em>instead?</em>
+    </p>
+    <p class="philosophy-follow">
+      Strop Studio exists to close that gap. We don't build escapes. We build tools that make your actual life feel like the story you'd choose to be inside.
+    </p>
+  </div>
+</section>
+
+<!-- =================== PRODUCTS =================== -->
+<section class="products" id="products">
+  <div class="section-header reveal">
+    <div class="section-label">What We're Building</div>
+    <h2 class="section-title">Every app is a new chapter</h2>
+  </div>
+
+  <div class="product-grid">
+    <!-- Valkyrie Protocol -->
+    <div class="product-card valkyrie reveal">
+      <div class="product-status">In Development</div>
+      <h3 class="product-name">Valkyrie Protocol</h3>
+      <div class="product-tagline">Fantasy warrior fitness training</div>
+      <p class="product-desc">
+        A training program inspired by warrior mythology. Real workout programming with real progressions &mdash; wrapped in motivational dialogue that meets you where you are, on the days that are hard and the days that aren't.
+      </p>
+      <div class="product-features">
+        <span class="feature-tag">Bodyweight workouts</span>
+        <span class="feature-tag">Mood-aware dialogue</span>
+        <span class="feature-tag">CrossFit progression model</span>
+        <span class="feature-tag">512+ voice lines</span>
+      </div>
+      <a href="valkyrie-protocol.html" class="product-link valkyrie-link">Learn More &rarr;</a>
+    </div>
+
+    <!-- The Tavern -->
+    <div class="product-card tavern reveal">
+      <div class="product-status">Coming Next</div>
+      <h3 class="product-name">The Tavern</h3>
+      <div class="product-tagline">Fantasy pub chore management</div>
+      <p class="product-desc">
+        Your task list, run by a snarky tavern keeper who has opinions about your dishes. Ambient pub sounds, musicians in the corner, a storyteller by the fire, and NPCs who won't stop trying to flirt with you while you clean.
+      </p>
+      <div class="product-features">
+        <span class="feature-tag">Ambient soundscape</span>
+        <span class="feature-tag">Tavern keeper NPC</span>
+        <span class="feature-tag">Background characters</span>
+        <span class="feature-tag">Task management</span>
+      </div>
+      <span class="product-coming-soon">Coming Soon</span>
+    </div>
+  </div>
+</section>
+
+<!-- =================== THE MAKER =================== -->
+<section class="maker" id="maker">
+  <div class="maker-inner">
+    <div class="maker-label reveal">The Maker</div>
+    <h2 class="maker-title reveal">A therapist who couldn't stick with working out</h2>
+    
+    <div class="reveal">
+      <p class="maker-text">
+        I'm a licensed clinical social worker who married into the world's fittest family. They love the gym. I found it unbearably boring. I'd start programs, lose interest in a week, and feel like the only person alive who couldn't just make herself do the thing.
+      </p>
+
+      <p class="maker-text">
+        Then I'd open a book, read a training montage &mdash; some warrior getting stronger, pushing through pain that meant something, becoming <em>someone</em> &mdash; and think: <strong>that.</strong> I want <em>that.</em> Not the six-pack. The feeling that it matters. That I'm inside a story, not just poking around at the gym in my stupid gear.
+      </p>
+
+      <p class="maker-text">
+        When my doctor told me my cholesterol was too high, it stopped being theoretical. I have people I want to be around for. So I started building the thing I wished existed &mdash; a workout experience that feels like the books I love, backed by real programming that my CrossFit-instructor sister-in-law would actually approve of.
+      </p>
+
+      <div class="maker-highlight">
+        Most people don't fail at fitness because they lack discipline. They fail because the experience doesn't meet a psychological need. Story does.
+      </div>
+
+      <p class="maker-text">
+        Here's what my clinical background taught me: narrative therapy, bibliotherapy &mdash; there are entire therapeutic modalities built on the principle that story drives behavioral change. This isn't a gimmick. It's a clinically informed approach wearing really cool armor.
+      </p>
+
+      <p class="maker-text">
+        The name "strop" is the leather strap used for a blade's final sharpening &mdash; the last step before the cut. You've already done the hard work of showing up. We're just the final edge.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =================== WAITLIST =================== -->
+<section class="waitlist" id="waitlist">
+  <div class="waitlist-inner reveal">
+    <h2 class="waitlist-title">The story is just beginning</h2>
+    <p class="waitlist-sub">
+      Be the first to know when our apps launch. No spam, no fluff &mdash; just updates on what we're building and when you can get your hands on it.
+    </p>
+    <form class="waitlist-form" onsubmit="event.preventDefault();">
+      <input type="email" class="waitlist-input" placeholder="your@email.com" required>
+      <button type="submit" class="waitlist-btn">Join</button>
+    </form>
+    <p class="waitlist-note">No spam. Unsubscribe anytime. We're too busy building apps to send you junk.</p>
+  </div>
+</section>
+
+<!-- =================== TRANSPARENCY =================== -->
+<section class="transparency">
+  <div class="transparency-inner reveal">
+    <div class="transparency-label">Transparency</div>
+    <h3 class="transparency-title">A note on how this was built</h3>
+    <p class="transparency-text">
+      Here's the truth: I'm a therapist, not a developer. I built Strop Studio with the help of AI tools because I am one human being with a dream and a very normal bank account. There are no investors behind this. No startup funding. Just me, a laptop, and a stubborn belief that this should exist.
+    </p>
+    <p class="transparency-text">
+      I believe in paying real humans for real work. Artists, designers, voice actors &mdash; they deserve to be compensated, and I want to get there. The plan is to grow this until I can hire them. Until then, I'm building with the tools I have and being honest about it. If that earns me a little grace from you, I promise I'll put it to good use.
+    </p>
+  </div>
+</section>
+
+<!-- =================== FOOTER =================== -->
+<footer class="footer">
+  <div class="footer-wordmark">Strop Studio</div>
+  <div class="footer-links">
+    <a href="#maker">Transparency</a>
+    <a href="#" target="_blank">Instagram</a>
+    <a href="#" target="_blank">TikTok</a>
+  </div>
+  <div class="footer-tagline">The final edge. &copy; 2026</div>
+</footer>
+
+<!-- =================== SCRIPTS =================== -->
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav shrink on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.nav');
+    if (window.scrollY > 80) {
+      nav.style.padding = '0.8rem 3rem';
+    } else {
+      nav.style.padding = '1.5rem 3rem';
+    }
+  });
+</script>
+
+</body>
+</html>
