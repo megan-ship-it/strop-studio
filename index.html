@@ -107,14 +107,14 @@
     justify-content: center;
     position: relative;
     padding: 8rem 3rem 6rem;
-    background: url('hero.png') center center / cover no-repeat;
+    background: url('hero.png') 70% center / cover no-repeat;
   }
 
   .hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(10, 10, 8, 0.6);
+    background: linear-gradient(to right, rgba(10, 10, 8, 0.75) 0%, rgba(10, 10, 8, 0.45) 50%, rgba(10, 10, 8, 0.25) 100%);
     pointer-events: none;
   }
 
