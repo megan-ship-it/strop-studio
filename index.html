@@ -620,6 +620,7 @@
   }
 
   .waitlist-form {
+    flex-direction: column;
     display: flex;
     gap: 0.75rem;
     max-width: 440px;
@@ -970,7 +971,17 @@
     <p class="waitlist-sub">
       Be the first to know when our apps launch. No spam, no fluff &mdash; just updates on what we're building and when you can get your hands on it.
     </p>
-    <a href="https://forms.gle/FcZcj6EiLAtAjC2i8" target="_blank" rel="noopener" class="waitlist-btn" style="display:inline-block; text-decoration:none; text-align:center;">Join the Waitlist</a>
+    <form class="waitlist-form" id="waitlist-form"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSeEG6Vpx8bgX50fZ-z2TBOYivps3nwzJzn5r_MV9X65Niz_gw/formResponse"
+          target="hidden-form-target" method="POST">
+      <input type="text" name="entry.923931800" class="waitlist-input" placeholder="Your name" required>
+      <input type="email" name="entry.1670591176" class="waitlist-input" placeholder="your@email.com" required>
+      <button type="submit" class="waitlist-btn">Join the Waitlist</button>
+    </form>
+    <iframe name="hidden-form-target" style="display:none;"></iframe>
+    <p class="waitlist-success" id="waitlist-success" style="display:none; color:#a8e6cf; font-size:1.1rem; margin-top:1rem;">
+      You're on the list! We'll be in touch.
+    </p>
     <p class="waitlist-note">No spam. Unsubscribe anytime. We're too busy building apps to send you junk.</p>
   </div>
 </section>
@@ -997,7 +1008,7 @@
     <a href="#" target="_blank">Instagram</a>
     <a href="#" target="_blank">TikTok</a>
   </div>
-  <div class="footer-tagline">The final edge. &copy; 2026</div>
+  <div class="footer-tagline">Time for a plot twist. &copy; 2026</div>
 </footer>
 
 <!-- =================== SCRIPTS =================== -->
@@ -1022,6 +1033,15 @@
     } else {
       nav.style.padding = '1.5rem 3rem';
     }
+  });
+
+  // Waitlist form submission
+  const waitlistForm = document.getElementById('waitlist-form');
+  waitlistForm.addEventListener('submit', () => {
+    setTimeout(() => {
+      waitlistForm.style.display = 'none';
+      document.getElementById('waitlist-success').style.display = 'block';
+    }, 500);
   });
 
 </script>
