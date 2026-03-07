@@ -970,13 +970,7 @@
     <p class="waitlist-sub">
       Be the first to know when our apps launch. No spam, no fluff &mdash; just updates on what we're building and when you can get your hands on it.
     </p>
-    <form class="waitlist-form" id="waitlist-form" action="https://formspree.io/f/xzzrqpba" method="POST">
-      <input type="email" name="email" class="waitlist-input" placeholder="your@email.com" required>
-      <button type="submit" class="waitlist-btn">Join</button>
-    </form>
-    <p class="waitlist-success" id="waitlist-success" style="display:none; color:#a8e6cf; font-size:1.1rem; margin-top:1rem;">
-      You're on the list! We'll be in touch.
-    </p>
+    <a href="https://forms.gle/FcZcj6EiLAtAjC2i8" target="_blank" rel="noopener" class="waitlist-btn" style="display:inline-block; text-decoration:none; text-align:center;">Join the Waitlist</a>
     <p class="waitlist-note">No spam. Unsubscribe anytime. We're too busy building apps to send you junk.</p>
   </div>
 </section>
@@ -1030,34 +1024,6 @@
     }
   });
 
-  // Waitlist form submission
-  const waitlistForm = document.getElementById('waitlist-form');
-  waitlistForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btn = waitlistForm.querySelector('.waitlist-btn');
-    const originalText = btn.textContent;
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-
-    try {
-      const response = await fetch(waitlistForm.action, {
-        method: 'POST',
-        body: new FormData(waitlistForm),
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (response.ok) {
-        waitlistForm.style.display = 'none';
-        document.getElementById('waitlist-success').style.display = 'block';
-      } else {
-        btn.textContent = 'Try again';
-        btn.disabled = false;
-      }
-    } catch {
-      btn.textContent = 'Try again';
-      btn.disabled = false;
-    }
-  });
 </script>
 
 </body>
