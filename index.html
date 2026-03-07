@@ -58,26 +58,34 @@
   }
 
   .nav-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    text-decoration: none;
+    padding: 0;
+  }
+
+  .nav-wordmark .wm-logo {
+    height: 44px;
+    width: auto;
+    display: block;
+  }
+
+  .nav-wordmark .wm-divider {
+    width: 1px;
+    height: 26px;
+    background: rgba(107, 107, 80, 0.5);
+    flex-shrink: 0;
+  }
+
+  .nav-wordmark .wm-text {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     font-style: italic;
     font-size: 1.3rem;
     color: var(--ss-text);
     letter-spacing: 0.04em;
-    text-decoration: none;
-    display: flex;
-    align-items: baseline;
-    gap: 0.4rem;
-  }
-
-  .nav-wordmark span {
-    font-family: 'Fragment Mono', monospace;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 0.75rem;
-    color: var(--ss-muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    white-space: nowrap;
   }
 
   .nav-cta {
@@ -757,12 +765,32 @@
   }
 
   .footer-wordmark {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-wordmark .wm-logo {
+    height: 36px;
+    width: auto;
+    display: block;
+  }
+
+  .footer-wordmark .wm-divider {
+    width: 1px;
+    height: 22px;
+    background: rgba(107, 107, 80, 0.5);
+    flex-shrink: 0;
+  }
+
+  .footer-wordmark .wm-text {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
     font-style: italic;
     font-size: 1.1rem;
     color: var(--ss-text);
     letter-spacing: 0.04em;
+    white-space: nowrap;
   }
 
   .footer-links {
@@ -819,8 +847,10 @@
   ============================================= */
   @media (max-width: 768px) {
     .nav { padding: 1rem 1.5rem; }
-    .nav-wordmark { font-size: 1.1rem; }
-    .nav-wordmark span { font-size: 0.7rem; }
+    .nav-wordmark { gap: 16px; }
+    .nav-wordmark .wm-logo { height: 32px; }
+    .nav-wordmark .wm-divider { height: 20px; }
+    .nav-wordmark .wm-text { font-size: 1.1rem; }
     .nav-cta { padding: 0.5rem 1rem; font-size: 0.65rem; }
 
     .hero { padding: 7rem 1.5rem 4rem; background-position: 50% center; }
@@ -870,7 +900,11 @@
 
 <!-- =================== NAV =================== -->
 <nav class="nav">
-  <a href="#" class="nav-wordmark">Strop <span>Studio</span></a>
+  <a href="#" class="nav-wordmark">
+    <img src="Strop%20Studio%20Logo.png" alt="Strop Studio logo" class="wm-logo">
+    <span class="wm-divider"></span>
+    <span class="wm-text">Strop Studio</span>
+  </a>
   <a href="#waitlist" class="nav-cta">Join Waitlist</a>
 </nav>
 
@@ -1020,7 +1054,11 @@
 
 <!-- =================== FOOTER =================== -->
 <footer class="footer">
-  <div class="footer-wordmark">Strop Studio</div>
+  <div class="footer-wordmark">
+    <img src="Strop%20Studio%20Logo.png" alt="Strop Studio logo" class="wm-logo">
+    <span class="wm-divider"></span>
+    <span class="wm-text">Strop Studio</span>
+  </div>
   <div class="footer-links">
     <a href="#maker">Transparency</a>
     <a href="#" target="_blank">Instagram</a>

@@ -1033,11 +1033,31 @@
   }
 
   .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+  }
+
+  .footer-brand .wm-logo {
+    height: 30px;
+    width: auto;
+    display: block;
+  }
+
+  .footer-brand .wm-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(194, 192, 188, 0.3);
+    flex-shrink: 0;
+  }
+
+  .footer-brand .wm-text {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 600;
     font-size: 0.95rem;
     color: var(--steel);
-    text-decoration: none;
+    white-space: nowrap;
   }
 
   .footer-right {
@@ -1449,7 +1469,11 @@
 
 <!-- FOOTER -->
 <footer>
-  <a href="#" class="footer-brand">Strop Studio</a>
+  <a href="#" class="footer-brand">
+    <img src="Strop%20Studio%20Logo.png" alt="Strop Studio logo" class="wm-logo">
+    <span class="wm-divider"></span>
+    <span class="wm-text">Strop Studio</span>
+  </a>
   <div class="footer-right">
     <a href="#">Instagram</a>
     <a href="#">TikTok</a>
