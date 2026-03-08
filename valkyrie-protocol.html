@@ -139,11 +139,11 @@
   .hero-content { max-width: 600px; }
 
   .hero-eyebrow {
-    font-size: 0.75rem;
+    font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.4em;
     text-transform: uppercase;
-    color: var(--vp-ember);
+    color: #C8F020;
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
@@ -154,9 +154,9 @@
 
   .hero-eyebrow::before {
     content: '';
-    width: 24px;
+    width: 30px;
     height: 1px;
-    background: var(--vp-ember);
+    background: #C8F020;
   }
 
   .hero-title {
@@ -351,12 +351,22 @@
   }
 
   .section-eyebrow {
-    font-size: 0.75rem;
+    font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.4em;
     text-transform: uppercase;
-    color: var(--vp-ember);
+    color: #C8F020;
     margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: #C8F020;
   }
 
   .section-title {
@@ -908,7 +918,7 @@
     margin: 0 auto;
   }
 
-  .founder-inner .section-eyebrow { text-align: center; }
+  .founder-inner .section-eyebrow { justify-content: center; }
   .founder-inner .section-title { text-align: center; margin-bottom: 2rem; }
 
   .founder-text p {

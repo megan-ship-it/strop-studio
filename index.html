@@ -188,7 +188,7 @@
   .hero-marker {
     font-family: 'Fragment Mono', monospace;
     font-weight: 400;
-    font-size: 0.7rem;
+    font-size: 11px;
     letter-spacing: 0.4em;
     text-transform: uppercase;
     color: var(--ss-accent);
@@ -362,7 +362,7 @@
   .section-label {
     font-family: 'Fragment Mono', monospace;
     font-weight: 400;
-    font-size: 0.7rem;
+    font-size: 11px;
     letter-spacing: 0.4em;
     text-transform: uppercase;
     color: var(--ss-accent);
@@ -373,13 +373,11 @@
     gap: 1rem;
   }
 
-  .section-label::before,
-  .section-label::after {
+  .section-label::before {
     content: '';
     width: 30px;
     height: 1px;
     background: var(--ss-accent);
-    opacity: 0.5;
   }
 
   .section-title {
@@ -555,7 +553,7 @@
   .maker-label {
     font-family: 'Fragment Mono', monospace;
     font-weight: 400;
-    font-size: 0.7rem;
+    font-size: 11px;
     letter-spacing: 0.4em;
     text-transform: uppercase;
     color: var(--ss-accent);
@@ -757,11 +755,21 @@
   .transparency-label {
     font-family: 'Fragment Mono', monospace;
     font-weight: 400;
-    font-size: 0.65rem;
-    letter-spacing: 0.3em;
+    font-size: 11px;
+    letter-spacing: 0.4em;
     text-transform: uppercase;
     color: var(--ss-accent);
     margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .transparency-label::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--ss-accent);
   }
 
   .transparency-title {
