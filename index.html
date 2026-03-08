@@ -317,17 +317,32 @@
     text-align: center;
   }
 
-  .philosophy-text {
+  .philosophy-quote {
+    margin: 0 0 2rem;
+    padding: 0;
+    border: none;
+  }
+
+  .philosophy-quote-text {
     font-family: 'Playfair Display', serif;
+    font-style: italic;
     font-size: clamp(1.4rem, 3vw, 1.8rem);
     font-weight: 400;
     line-height: 1.7;
     color: var(--ss-text);
   }
 
-  .philosophy-text em {
+  .philosophy-quote-cite {
+    display: block;
+    margin-top: 1rem;
+    font-family: 'Fragment Mono', monospace;
+    font-style: normal;
+    font-size: clamp(0.75rem, 1.3vw, 0.85rem);
+    color: var(--ss-muted);
+  }
+
+  .philosophy-quote-cite em {
     font-style: italic;
-    color: var(--ss-accent);
   }
 
   .philosophy-follow {
@@ -917,11 +932,12 @@
 <section class="philosophy" id="philosophy">
   <div class="philosophy-inner reveal">
     <div class="eyebrow">The Idea</div>
-    <p class="philosophy-text">
-      Nothing pulls a person in like a good story. The problem is, most stories ask you to leave your life behind to experience them. What if your real life could feel like one <em>instead?</em>
-    </p>
+    <blockquote class="philosophy-quote">
+      <p class="philosophy-quote-text">&ldquo;It&rsquo;s like everyone tells a story about themselves inside their own head. Always. All the time. That story makes you what you are. We build ourselves out of that story.&rdquo;</p>
+      <cite class="philosophy-quote-cite">— Patrick Rothfuss, <em>The Name of the Wind</em></cite>
+    </blockquote>
     <p class="philosophy-follow">
-      Strop Studio exists to close that gap. We don't build escapes. We build tools that make your actual life feel like the story you'd choose to be inside.
+      You already know what it feels like to live inside a story. That feeling isn't something to grow out of — it's something to build with. Strop Studio makes tools that put you back inside the story. The real one. Yours.
     </p>
   </div>
 </section>
