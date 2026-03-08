@@ -26,7 +26,7 @@
     background: var(--ss-void);
     color: var(--ss-text);
     font-family: 'Fragment Mono', monospace;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.75;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -121,7 +121,7 @@
     flex-direction: column;
     justify-content: center;
     position: relative;
-    padding: 8rem 3rem 6rem;
+    padding: 8rem 3rem;
     overflow: hidden;
   }
 
@@ -185,26 +185,31 @@
     max-width: 600px;
   }
 
-  .hero-marker {
+  .eyebrow {
     font-family: 'Fragment Mono', monospace;
     font-weight: 400;
     font-size: 11px;
-    letter-spacing: 0.4em;
+    letter-spacing: 0.35em;
     text-transform: uppercase;
     color: var(--ss-accent);
-    margin-bottom: 2.5rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
-    opacity: 0;
-    animation: slideIn 0.8s 0.3s forwards;
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
   }
 
-  .hero-marker::before {
+  .eyebrow::before {
     content: '';
-    width: 30px;
+    width: 28px;
     height: 1px;
     background: var(--ss-accent);
+    flex-shrink: 0;
+  }
+
+  .hero .eyebrow {
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: slideIn 0.8s 0.3s forwards;
   }
 
   .hero-title {
@@ -240,7 +245,7 @@
   .hero-sub {
     font-family: 'Fragment Mono', monospace;
     font-weight: 400;
-    font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+    font-size: clamp(0.88rem, 1.5vw, 0.9rem);
     color: var(--ss-muted);
     line-height: 1.75;
     max-width: 560px;
@@ -355,29 +360,7 @@
   }
 
   .section-header {
-    text-align: center;
     margin-bottom: 4rem;
-  }
-
-  .section-label {
-    font-family: 'Fragment Mono', monospace;
-    font-weight: 400;
-    font-size: 11px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--ss-accent);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .section-label::before {
-    content: '';
-    width: 30px;
-    height: 1px;
-    background: var(--ss-accent);
   }
 
   .section-title {
@@ -467,7 +450,7 @@
 
   .product-desc {
     font-family: 'Fragment Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.88rem;
     line-height: 1.75;
     color: var(--ss-muted);
     margin-bottom: 1.5rem;
@@ -528,7 +511,7 @@
      THE MAKER (FOUNDER STORY)
   ============================================= */
   .maker {
-    padding: 8rem 3rem;
+    padding: 6rem 3rem;
     position: relative;
     background: var(--ss-surface);
     border-top: 1px solid var(--ss-border);
@@ -548,26 +531,6 @@
     margin: 0 auto;
     position: relative;
     z-index: 1;
-  }
-
-  .maker-label {
-    font-family: 'Fragment Mono', monospace;
-    font-weight: 400;
-    font-size: 11px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--ss-accent);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .maker-label::before {
-    content: '';
-    width: 30px;
-    height: 1px;
-    background: var(--ss-accent);
   }
 
   .maker-title {
@@ -591,7 +554,7 @@
 
   .maker-text {
     font-family: 'Fragment Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.88rem;
     line-height: 1.75;
     color: var(--ss-text);
     margin-bottom: 1.5rem;
@@ -726,7 +689,7 @@
      TRANSPARENCY SECTION
   ============================================= */
   .transparency {
-    padding: 4rem 3rem 6rem;
+    padding: 4rem 3rem 7rem;
     position: relative;
   }
 
@@ -752,26 +715,6 @@
     opacity: 0.4;
   }
 
-  .transparency-label {
-    font-family: 'Fragment Mono', monospace;
-    font-weight: 400;
-    font-size: 11px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--ss-accent);
-    margin-bottom: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .transparency-label::before {
-    content: '';
-    width: 30px;
-    height: 1px;
-    background: var(--ss-accent);
-  }
-
   .transparency-title {
     font-family: 'Playfair Display', serif;
     font-weight: 700;
@@ -783,7 +726,7 @@
 
   .transparency-text {
     font-family: 'Fragment Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.88rem;
     line-height: 1.75;
     color: var(--ss-muted);
     margin-bottom: 1rem;
@@ -959,7 +902,7 @@
   <div class="hero-accent"></div>
   <div class="hero-accent-2"></div>
   <div class="hero-content">
-    <div class="hero-marker">Fantasy-themed tools for real life</div>
+    <div class="eyebrow">Fantasy-themed tools for real life</div>
     <h1 class="hero-title">A good story is <em>irresistible.</em></h1>
     <p class="hero-subtitle">Why should you have to leave your life to live inside one?</p>
     <p class="hero-sub">
@@ -975,6 +918,7 @@
 <!-- =================== PHILOSOPHY =================== -->
 <section class="philosophy" id="philosophy">
   <div class="philosophy-inner reveal">
+    <div class="eyebrow">The Idea</div>
     <p class="philosophy-text">
       Nothing pulls a person in like a good story. The problem is, most stories ask you to leave your life behind to experience them. What if your real life could feel like one <em>instead?</em>
     </p>
@@ -987,7 +931,7 @@
 <!-- =================== PRODUCTS =================== -->
 <section class="products" id="products">
   <div class="section-header reveal">
-    <div class="section-label">What We're Building</div>
+    <div class="eyebrow">What We're Building</div>
     <h2 class="section-title">Every app is a new chapter</h2>
   </div>
 
@@ -1031,7 +975,7 @@
 <!-- =================== THE MAKER =================== -->
 <section class="maker" id="maker">
   <div class="maker-inner">
-    <div class="maker-label reveal">The Maker</div>
+    <div class="eyebrow reveal">The Maker</div>
     <h2 class="maker-title reveal">A therapist who couldn't stick with working out</h2>
     
     <div class="reveal">
@@ -1065,6 +1009,7 @@
 <!-- =================== WAITLIST =================== -->
 <section class="waitlist" id="waitlist">
   <div class="waitlist-inner reveal">
+    <div class="eyebrow">Stay in the Story</div>
     <h2 class="waitlist-title">The story is just beginning</h2>
     <p class="waitlist-sub">
       Be the first to know when our apps launch. No spam, no fluff &mdash; just updates on what we're building and when you can get your hands on it.
@@ -1087,7 +1032,7 @@
 <!-- =================== TRANSPARENCY =================== -->
 <section class="transparency">
   <div class="transparency-inner reveal">
-    <div class="transparency-label">Transparency</div>
+    <div class="eyebrow">Transparency</div>
     <h3 class="transparency-title">A note on how this was built</h3>
     <p class="transparency-text">
       Here's the truth: I'm a therapist, not a developer. I built Strop Studio with the help of AI tools because I am one human being with a dream and a very normal bank account. There are no investors behind this. No startup funding. Just me, a laptop, and a stubborn belief that this should exist.
