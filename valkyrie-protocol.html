@@ -147,12 +147,14 @@
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.75rem;
     opacity: 0;
     animation: slideIn 0.8s 0.2s forwards;
   }
 
-  .hero-eyebrow::before {
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
     content: '';
     width: 30px;
     height: 1px;
@@ -522,12 +524,6 @@
   }
 
   .workout-text { padding-top: 1rem; }
-  .workout-text .section-eyebrow {
-    justify-content: flex-start;
-  }
-  .workout-text .section-eyebrow::after {
-    display: none;
-  }
 
   .workout-card {
     background: var(--vp-forge);
@@ -1140,7 +1136,6 @@
       text-align: center;
     }
     .hero-eyebrow { justify-content: center; }
-    .hero-eyebrow::before { display: none; }
     .hero-desc { margin: 0 auto 2rem; }
     .phone-mockup {
       width: 240px;
