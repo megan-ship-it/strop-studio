@@ -579,6 +579,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    flex-wrap: wrap;
     padding: 0.5rem 0;
     border-bottom: 1px solid rgba(44,38,32,0.5);
   }
@@ -589,6 +590,25 @@
     font-size: 0.85rem;
     font-weight: 400;
     color: var(--vp-mist);
+  }
+
+  .wk-exercise-aka {
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(0.7rem, 1.8vw, 0.75rem);
+    color: rgba(232,230,226,0.35);
+    margin: 0.25rem 0 0;
+    letter-spacing: 0.02em;
+  }
+
+  .wk-exercise-aka a {
+    color: rgba(201,168,76,0.55);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .wk-exercise-aka a:hover {
+    color: rgba(201,168,76,0.85);
   }
 
   .wk-exercise-reps {
@@ -1287,6 +1307,7 @@
         <div class="wk-exercise">
           <span class="wk-exercise-name">Arm Circles</span>
           <span class="wk-exercise-reps">30 sec each</span>
+          <p class="wk-exercise-aka">also known as <a href="https://en.wikipedia.org/wiki/Circumduction_(anatomy)" target="_blank" rel="noopener noreferrer">shoulder circumduction</a></p>
         </div>
         <div class="wk-exercise">
           <span class="wk-exercise-name">Inchworms</span>
@@ -1295,30 +1316,36 @@
         <div class="wk-exercise">
           <span class="wk-exercise-name">Leg Swings</span>
           <span class="wk-exercise-reps">10 each side</span>
+          <p class="wk-exercise-aka">also known as <a href="https://en.wikipedia.org/wiki/Hip_flexor" target="_blank" rel="noopener noreferrer">sagittal leg pendulums</a></p>
         </div>
 
         <div class="wk-section-label">Main Effort</div>
         <div class="wk-exercise">
           <span class="wk-exercise-name">Air Squats</span>
           <span class="wk-exercise-reps">10 reps</span>
+          <p class="wk-exercise-aka">also known as <a href="https://en.wikipedia.org/wiki/Squat_(exercise)" target="_blank" rel="noopener noreferrer">bodyweight squats</a></p>
         </div>
         <div class="wk-exercise">
           <span class="wk-exercise-name">Push-Ups (scaled)</span>
           <span class="wk-exercise-reps">8 reps</span>
+          <p class="wk-exercise-aka">also known as <a href="https://en.wikipedia.org/wiki/Push-up" target="_blank" rel="noopener noreferrer">floor presses (bodyweight)</a></p>
         </div>
         <div class="wk-exercise">
           <span class="wk-exercise-name">Hollow Body Hold</span>
           <span class="wk-exercise-reps">20 sec</span>
+          <p class="wk-exercise-aka">also known as <a href="https://en.wikipedia.org/wiki/Core_stability" target="_blank" rel="noopener noreferrer">dish hold</a></p>
         </div>
         <div class="wk-exercise">
           <span class="wk-exercise-name">Burpees</span>
           <span class="wk-exercise-reps">5 reps</span>
+          <p class="wk-exercise-aka">also known as <a href="https://en.wikipedia.org/wiki/Burpee_(exercise)" target="_blank" rel="noopener noreferrer">squat thrust</a></p>
         </div>
 
         <div class="wk-section-label">Cool-Down</div>
         <div class="wk-exercise">
           <span class="wk-exercise-name">Warrior's Centering Breath</span>
           <span class="wk-exercise-reps">2 min</span>
+          <p class="wk-exercise-aka">also known as <a href="https://en.wikipedia.org/wiki/Pranayama" target="_blank" rel="noopener noreferrer">tactical breathing</a></p>
         </div>
 
         <div class="wk-note">"Complete as many rounds as possible. Rest when you need to. The blade doesn't dull from resting &mdash; it dulls from never being drawn."</div>
